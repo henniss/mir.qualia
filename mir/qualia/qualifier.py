@@ -41,8 +41,8 @@ class Qualifier:
         self._qualities = qualities
 
     def __repr__(self):
-        cls = type(self).__qualname__
-        return f'{cls}(qualities={self._qualities!r})'
+        return '{cls}(qualities={this._qualities!r})'.format(
+            cls=type(self).__qualname__, this=self)
 
     def __call__(self, lines):
         """Qualify lines.
@@ -118,8 +118,10 @@ class _BlockAttributes:
                              quality=re.escape(quality)))
 
     def __repr__(self):
-        cls = type(self).__qualname__
-        return f'{cls}(prefix={self._prefix!r}, quality={self._quality!r})'
+        return ('{cls}(prefix={this._prefix!r}, quality={this._quality!r})'
+                .format(
+                    cls=type(self).__qualname__,
+                    this=self))
 
     @classmethod
     def from_begin_line(cls, line):
